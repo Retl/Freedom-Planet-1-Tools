@@ -105,3 +105,8 @@ state("FP")
     int card99 : 0x0148902C, 0x1eec;
     int card100 : 0x0148902C, 0x1f3c;
 }
+
+startup
+{
+	settings.add("Display HUD", false);
+}
