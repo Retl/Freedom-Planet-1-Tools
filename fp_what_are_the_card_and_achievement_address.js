@@ -28,6 +28,9 @@ Once you've confirmed it, used the PointerScan as before to try to find a route 
 However because the Digging Spot achievement is the 38th achievement, we need to work back to the first one (clearing as Lilac). As before, this is a 80 byte difference between each achievement (0x50). For this I just opened up the Windows Calculator, set it on hex mode, grabbed the last pointer value (in my case, B94) and subtracted B90 from it (0x50 * 0x25 or 80 * 37). The resulting pointer route should now be going to the first achievement. To find every achievement from there, just add the 0x50.
 
 Every Achievement pointer after that just adding 80 bytes to that pointer (not an extra pointer, it's a different pointer in a different spot) (0x50)
+--
+
+For room id, simply go to the corresponding room and check the id. Should be quick and easy: 
 
 */
 
@@ -43,8 +46,8 @@ console.log(bs);
 console.log(c);
 console.log(c.toString(16));
 
-console.log("--------------------------------------------------");
-console.log("Card Addresses: ");
+console.log("// --------------------------------------------------");
+console.log("// Card Addresses: ");
 // "fp.exe"+0148902C, 4C => Codex Capture Card 1: 4 byte value. 0 = Unobtained. 1 = Obtained. 2 = Opened.
 var basePointerOffset = "0x4C";
 var cardDelta = "0x50";
@@ -54,18 +57,20 @@ for (i=0; i<100; i++) {
     console.log('int card' + (i+1) +' : ' + basePointer + ', 0x' + (parseInt(basePointerOffset) + (parseInt(cardDelta) * i)).toString(16) + ';');
     //console.log("Card " + (i+1))
 }
-console.log("--------------------------------------------------");
+console.log("// --------------------------------------------------");
 
-console.log("--------------------------------------------------");
-console.log("Achievement Addresses: ");
+console.log("// --------------------------------------------------");
+console.log("// Achievement Addresses: ");
 // "fp.exe"+0148902C, 4C => Codex Capture Card 1: 4 byte value. 0 = Unobtained. 1 = Obtained. 2 = Opened.
-var basePointerOffsetAchievements = "0x04";
+    var basePointerOffsetAchievementsMillaDigspot = " 0xb94";
+    var basePointerOffsetAchievements = (parseInt(basePointerOffsetAchievementsMillaDigspot) - parseInt("0xb90")).toString(16);
+    //basePointerOffsetAchievements = "0x04";
 
 // Output it in a way that's easy to copypaste into a Livesplit ASL script.
 for (i=0; i<100; i++) {
     console.log('int achievement' + (i+1) +' : ' + basePointer + ', 0x' + (parseInt(basePointerOffsetAchievements) + (parseInt(cardDelta) * i)).toString(16) + ';');
     //console.log("Card " + (i+1))
 }
-console.log("--------------------------------------------------");
+console.log("// --------------------------------------------------");
 
 //"fp.exe"+0148902C

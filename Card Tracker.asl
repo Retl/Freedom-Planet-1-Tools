@@ -1,6 +1,9 @@
 // Card Tracker for Freedom Planet. Only supports Beta 1.21.5, not the final release build.
 // If you need a VAR Viewer: https://github.com/hawkerm/LiveSplit.ASLVarViewer
 
+// 100 cards = 10 levels with 10 cards. (FD and SMA do not have cards)
+// 8 achievements per row, 7 rows of achievements = 56 achievements.
+
 state("FP")
 {
     int roomID : 0x14BDBC8;
@@ -104,9 +107,117 @@ state("FP")
     int card98 : 0x0148902C, 0x1e9c;
     int card99 : 0x0148902C, 0x1eec;
     int card100 : 0x0148902C, 0x1f3c;
+    
+    int achievement1 : 0x0148902C, 0x4;
+    int achievement2 : 0x0148902C, 0x54;
+    int achievement3 : 0x0148902C, 0xa4;
+    int achievement4 : 0x0148902C, 0xf4;
+    int achievement5 : 0x0148902C, 0x144;
+    int achievement6 : 0x0148902C, 0x194;
+    int achievement7 : 0x0148902C, 0x1e4;
+    int achievement8 : 0x0148902C, 0x234;
+    int achievement9 : 0x0148902C, 0x284;
+    int achievement10 : 0x0148902C, 0x2d4;
+    int achievement11 : 0x0148902C, 0x324;
+    int achievement12 : 0x0148902C, 0x374;
+    int achievement13 : 0x0148902C, 0x3c4;
+    int achievement14 : 0x0148902C, 0x414;
+    int achievement15 : 0x0148902C, 0x464;
+    int achievement16 : 0x0148902C, 0x4b4;
+    int achievement17 : 0x0148902C, 0x504;
+    int achievement18 : 0x0148902C, 0x554;
+    int achievement19 : 0x0148902C, 0x5a4;
+    int achievement20 : 0x0148902C, 0x5f4;
+    int achievement21 : 0x0148902C, 0x644;
+    int achievement22 : 0x0148902C, 0x694;
+    int achievement23 : 0x0148902C, 0x6e4;
+    int achievement24 : 0x0148902C, 0x734;
+    int achievement25 : 0x0148902C, 0x784;
+    int achievement26 : 0x0148902C, 0x7d4;
+    int achievement27 : 0x0148902C, 0x824;
+    int achievement28 : 0x0148902C, 0x874;
+    int achievement29 : 0x0148902C, 0x8c4;
+    int achievement30 : 0x0148902C, 0x914;
+    int achievement31 : 0x0148902C, 0x964;
+    int achievement32 : 0x0148902C, 0x9b4;
+    int achievement33 : 0x0148902C, 0xa04;
+    int achievement34 : 0x0148902C, 0xa54;
+    int achievement35 : 0x0148902C, 0xaa4;
+    int achievement36 : 0x0148902C, 0xaf4;
+    int achievement37 : 0x0148902C, 0xb44;
+    int achievement38 : 0x0148902C, 0xb94;
+    int achievement39 : 0x0148902C, 0xbe4;
+    int achievement40 : 0x0148902C, 0xc34;
+    int achievement41 : 0x0148902C, 0xc84;
+    int achievement42 : 0x0148902C, 0xcd4;
+    int achievement43 : 0x0148902C, 0xd24;
+    int achievement44 : 0x0148902C, 0xd74;
+    int achievement45 : 0x0148902C, 0xdc4;
+    int achievement46 : 0x0148902C, 0xe14;
+    int achievement47 : 0x0148902C, 0xe64;
+    int achievement48 : 0x0148902C, 0xeb4;
+    int achievement49 : 0x0148902C, 0xf04;
+    int achievement50 : 0x0148902C, 0xf54;
+    int achievement51 : 0x0148902C, 0xfa4;
+    int achievement52 : 0x0148902C, 0xff4;
+    int achievement53 : 0x0148902C, 0x1044;
+    int achievement54 : 0x0148902C, 0x1094;
+    int achievement55 : 0x0148902C, 0x10e4;
+    int achievement56 : 0x0148902C, 0x1134;
+    int achievement57 : 0x0148902C, 0x1184;
+    int achievement58 : 0x0148902C, 0x11d4;
+    int achievement59 : 0x0148902C, 0x1224;
+    int achievement60 : 0x0148902C, 0x1274;
+    int achievement61 : 0x0148902C, 0x12c4;
+    int achievement62 : 0x0148902C, 0x1314;
+    int achievement63 : 0x0148902C, 0x1364;
+    int achievement64 : 0x0148902C, 0x13b4;
+    int achievement65 : 0x0148902C, 0x1404;
+    int achievement66 : 0x0148902C, 0x1454;
+    int achievement67 : 0x0148902C, 0x14a4;
+    int achievement68 : 0x0148902C, 0x14f4;
+    int achievement69 : 0x0148902C, 0x1544;
+    int achievement70 : 0x0148902C, 0x1594;
+    int achievement71 : 0x0148902C, 0x15e4;
+    int achievement72 : 0x0148902C, 0x1634;
+    int achievement73 : 0x0148902C, 0x1684;
+    int achievement74 : 0x0148902C, 0x16d4;
+    int achievement75 : 0x0148902C, 0x1724;
+    int achievement76 : 0x0148902C, 0x1774;
+    int achievement77 : 0x0148902C, 0x17c4;
+    int achievement78 : 0x0148902C, 0x1814;
+    int achievement79 : 0x0148902C, 0x1864;
+    int achievement80 : 0x0148902C, 0x18b4;
+    int achievement81 : 0x0148902C, 0x1904;
+    int achievement82 : 0x0148902C, 0x1954;
+    int achievement83 : 0x0148902C, 0x19a4;
+    int achievement84 : 0x0148902C, 0x19f4;
+    int achievement85 : 0x0148902C, 0x1a44;
+    int achievement86 : 0x0148902C, 0x1a94;
+    int achievement87 : 0x0148902C, 0x1ae4;
+    int achievement88 : 0x0148902C, 0x1b34;
+    int achievement89 : 0x0148902C, 0x1b84;
+    int achievement90 : 0x0148902C, 0x1bd4;
+    int achievement91 : 0x0148902C, 0x1c24;
+    int achievement92 : 0x0148902C, 0x1c74;
+    int achievement93 : 0x0148902C, 0x1cc4;
+    int achievement94 : 0x0148902C, 0x1d14;
+    int achievement95 : 0x0148902C, 0x1d64;
+    int achievement96 : 0x0148902C, 0x1db4;
+    int achievement97 : 0x0148902C, 0x1e04;
+    int achievement98 : 0x0148902C, 0x1e54;
+    int achievement99 : 0x0148902C, 0x1ea4;
+    int achievement100 : 0x0148902C, 0x1ef4;
 }
 
 startup
 {
-	settings.add("Display HUD", false);
+
+    // achievement38 is the Digspot achievement, the fastest to test.
+	settings.Add("Display HUD", false);
+    
+    /* To highlights cards available on a level: 
+    RoomDetails[roomID] = {Level Number, Array of IDs of Cards In Room, Array of IDs of Achievements Only Available In Room}
+    LevelDetails[Level Number] = {Level Image}
+    */
 }
