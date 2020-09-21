@@ -2,6 +2,9 @@
 // basePointerOffset should be a pointer to the first card. Should be able to get this with one offset from base.
 // basePointer First offset relative to the executable. Honestly I just end up finding this as a byproduct of 
 // pointer-scanning for the first card's status repeatedly as I grab it, quit, reset card status, and repeats.
+//
+// Running this with no args defaults to printing the FP 1.21.5 windows beta offsets formated for a LiveSplit ASL script.
+// Card Base, Card Offset, Achievement Base, and Achievement offset can be specified as well, in that order. As hex literals.
 
 /*
 
@@ -12,12 +15,12 @@ Once you're sure you've got the right value, do a pointer scan. Try to find a ro
 Every card pointer after that just adding 80 bytes to that pointer (not an extra pointer, it's a different pointer in a different spot) (0x50)
 --
 
-For Achievements, the fastest way is to: 
+Process for finding the offsets for Achievements, the fastest way is to: 
 Clear all achievements
 start Aqua Tunnel and immediately scan for 0
 Find the digging spot on the floor one level below AT's first card (this is like 5 seconds away from the starting area, just flutter up and to the right immediately, but not to the highest spot.
 Immediately after digging the spot up and seeing the treasure appear, search for int value 1.
-Quit the level. The Achievement screen should pop up. After it's visible on screen, scan for int value 2.
+Quit the level. The Achievement screen should pop up. After you CLOSE this screen and transition to the next, scan for 2.
 Go to the Gallery menu and reset the achievements again. DO NOT SCAN ON THIS SCREEN, THIS TENDS TO BREAK FOR SOME REASON
 Restart AT again and scan for 0 again. Repeat until there are few results left (this shouldn't take long).
 
@@ -30,9 +33,31 @@ However because the Digging Spot achievement is the 38th achievement, we need to
 Every Achievement pointer after that just adding 80 bytes to that pointer (not an extra pointer, it's a different pointer in a different spot) (0x50)
 --
 
+Process for finding roomID address:
+Main Menu: 3
+Gallery: 10
+Time Attack Stage Select: 5
+Dragon Valley First Room:  20
+
+This address is static unlike the others and should be trivial to relocate.
+
+--
+
 For room id, simply go to the corresponding room and check the id. Should be quick and easy: 
 
 */
+
+var argCardBase = null;
+var argCardOffset = null;
+var argAchievementBase = null;
+var argAchievementOffset = null;
+var roomPointer = null;
+
+if (process.argv.length >= 3) {argCardBase = process.argv[2];}
+if (process.argv.length >= 4) {argCardOffset = process.argv[3];}
+if (process.argv.length >= 5) {argAchievementBase = process.argv[4];}
+if (process.argv.length >= 6) {argAchievementOffset = process.argv[5];}
+if (process.argv.length >= 7) {argCardOffset = process.argv[6];}
 
 var as = "50";
 var bs = "0x4C";
@@ -51,7 +76,7 @@ console.log("// Card Addresses: ");
 // "fp.exe"+0148902C, 4C => Codex Capture Card 1: 4 byte value. 0 = Unobtained. 1 = Obtained. 2 = Opened.
 var basePointerOffset = "0x4C";
 var cardDelta = "0x50";
-var basePointer = "0x0148902C";
+var basePointer = "0x018D7BF8"; // On Retail 1.21.5, this is 0x018D7BF8. On 1.21.5 Beta, this is 0x0148902C
 // Output it in a way that's easy to copypaste into a Livesplit ASL script.
 for (i=0; i<100; i++) {
     console.log('int card' + (i+1) +' : ' + basePointer + ', 0x' + (parseInt(basePointerOffset) + (parseInt(cardDelta) * i)).toString(16) + ';');
@@ -61,8 +86,9 @@ console.log("// --------------------------------------------------");
 
 console.log("// --------------------------------------------------");
 console.log("// Achievement Addresses: ");
+// The difference between the pointer offsets of the first card and first achievement is 0x48. First achievement is the smaller value.
 // "fp.exe"+0148902C, 4C => Codex Capture Card 1: 4 byte value. 0 = Unobtained. 1 = Obtained. 2 = Opened.
-    var basePointerOffsetAchievementsMillaDigspot = " 0xb94";
+    var basePointerOffsetAchievementsMillaDigspot = " 0xb94"; 
     var basePointerOffsetAchievements = (parseInt(basePointerOffsetAchievementsMillaDigspot) - parseInt("0xb90")).toString(16);
     //basePointerOffsetAchievements = "0x04";
 
