@@ -17,12 +17,13 @@ Every card pointer after that just adding 80 bytes to that pointer (not an extra
 
 Process for finding the offsets for Achievements, the fastest way is to: 
 Clear all achievements
-start Aqua Tunnel and immediately scan for 0
-Find the digging spot on the floor one level below AT's first card (this is like 5 seconds away from the starting area, just flutter up and to the right immediately, but not to the highest spot.
+Start Aqua Tunnel. Find the digging spot on the floor one level below AT's first card (this is like 5 seconds away from the starting area, just flutter up and to the right immediately, but not to the highest spot.
 Immediately after digging the spot up and seeing the treasure appear, search for int value 1.
-Quit the level. The Achievement screen should pop up. After you CLOSE this screen and transition to the next, scan for 2.
-Go to the Gallery menu and reset the achievements again. DO NOT SCAN ON THIS SCREEN, THIS TENDS TO BREAK FOR SOME REASON
-Restart AT again and scan for 0 again. Repeat until there are few results left (this shouldn't take long).
+Quit the level. The Achievement screen should pop up. After you CLOSE this screen and transition to the next, START AQUA TUNNEL AGAIN. After the stage loads, search for 2. Quit the level.
+Go to the Gallery menu and CLEAR ALL ACHIEVEMENTS AGAIN. DO NOT SCAN ON THIS SCREEN, THIS TENDS TO BREAK FOR SOME REASON
+start Aqua Tunnel again and immediately scan for 0
+
+Dig up the treasure spot and search for 1 again. Repeat this entire cycle until there are few results left (this shouldn't take long).
 
 To confirm you have the right one, you can't just force a 2 because Steam will verify your achievements and overwrite it. Instead, delete your achievements, start ANY level (even SMA), then set the achievement value to 1. Quit the level. On exit, the achievement should be "earned" and advance to 2 as expected.
 
@@ -76,7 +77,7 @@ console.log("// Card Addresses: ");
 // "fp.exe"+0148902C, 4C => Codex Capture Card 1: 4 byte value. 0 = Unobtained. 1 = Obtained. 2 = Opened.
 var basePointerOffset = "0x4C";
 var cardDelta = "0x50";
-var basePointer = "0x018D7BF8"; // On Retail 1.21.5, this is 0x018D7BF8. On 1.21.5 Beta, this is 0x0148902C
+var basePointer = "0x01D7A9E4"; // On Retail 1.21.5, this is 0x018D7BF8. On 1.21.5 Beta, this is 0x0148902C
 // Output it in a way that's easy to copypaste into a Livesplit ASL script.
 for (i=0; i<100; i++) {
     console.log('int card' + (i+1) +' : ' + basePointer + ', 0x' + (parseInt(basePointerOffset) + (parseInt(cardDelta) * i)).toString(16) + ';');
