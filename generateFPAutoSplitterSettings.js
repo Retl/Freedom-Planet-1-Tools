@@ -67,13 +67,15 @@ screenNames[70] = "FD6";
 screenNames[71] = "FD7";
 screenNames[72] = "FD8";
 
+var levelEnds = [19, 23, 28, 34, 35, 43, 49, 55, 58, 64, 66, 68, 70, 72];
+
 var i;
-var baseStr = 'settings.Add("enableTKN_LVL_LE", true, "Enable to allow the automatic Level-End splits for TKN_LVL.", "enableLevelEndSplits");';
+var baseStr = 'settings.Add("enableTKN_LVL_LE", true, "TKN_LVL - Enable to allow the automatic Level-End splits for TKN_LVL.", "enableLevelEndSplits");';
 
 console.log('//--------------------------------------------------');
 
 console.log('settings.Add("enableLevelEndSplits", true, "Enable to allow the automatic Level-End splits on the levels checked below. They will be ignored if this is unchecked.");');
-console.log(baseStr.replace("TKN_LVL", screenNames[19]).replace("TKN_LVL", screenNames[19]));
+/*console.log(baseStr.replace("TKN_LVL", screenNames[19]).replace("TKN_LVL", screenNames[19]));
 console.log(baseStr.replace("TKN_LVL", screenNames[23]).replace("TKN_LVL", screenNames[23]));
 console.log(baseStr.replace("TKN_LVL", screenNames[28]).replace("TKN_LVL", screenNames[28]));
 console.log(baseStr.replace("TKN_LVL", screenNames[34]).replace("TKN_LVL", screenNames[34]));
@@ -87,12 +89,38 @@ console.log(baseStr.replace("TKN_LVL", screenNames[66]).replace("TKN_LVL", scree
 console.log(baseStr.replace("TKN_LVL", screenNames[68]).replace("TKN_LVL", screenNames[68]));
 console.log(baseStr.replace("TKN_LVL", screenNames[70]).replace("TKN_LVL", screenNames[70]));
 console.log(baseStr.replace("TKN_LVL", screenNames[72]).replace("TKN_LVL", screenNames[72]));
+*/
+levelEnds.forEach(function (item, ind) {
+    console.log(baseStr.replace("TKN_LVL", screenNames[item]).replace("TKN_LVL", screenNames[item]).replace("TKN_LVL", screenNames[item]));
+}); 
 console.log('//--------------------------------------------------');
 
-baseStr = 'settings.Add("enableTKN_LVL_Screen", true, "Enable to allow the automatic Screen-Transition splits for TKN_LVL.", "enableScreenSplits");';
+baseStr = 'settings.Add("enableTKN_LVL_Screen", true, "TKN_LVL - Enable to allow the automatic Screen-Transition splits for TKN_LVL.", "enableScreenSplits");';
 console.log('settings.Add("enableScreenSplits", false, "Enable to allow the automatic Screen-Transition splits on the levels checked below. They will be ignored if this is unchecked.");');
 for (i = 16; i < 72; i++) {
-    console.log(baseStr.replace("TKN_LVL", screenNames[i]).replace("TKN_LVL", screenNames[i]));
+    console.log(baseStr.replace("TKN_LVL", screenNames[i]).replace("TKN_LVL", screenNames[i]).replace("TKN_LVL", screenNames[i]));
 }
 
+console.log('//--------------------------------------------------');
+
+
+var baseStrAutoSplitBySettings = 'else if (settings["enableScreenSplits"]) \r\n    {\r\n        TKN_ALL_SPLITS\r\n    }\r\n    else if (settings["enableLevelEndSplits"]) \r\n    {\r\n        \r\n    }';
+var baseStrRespectSplitSetting = 'if (old.frame == TKN_LVL_NUM && settings["TKN_LVL_SETTING"]) {vars.splitPlz = true;}';
+var baseSettingName = "enableTKN_LVL_Screen";
+
+// else if (settings["enableLevelEndSplits"]) 
+for (i = 16; i < 72; i++) {
+    var settingName = baseSettingName.replace("TKN_LVL", screenNames[i]);
+    console.log(baseStrRespectSplitSetting.replace("TKN_LVL_NUM", i).replace("TKN_LVL_SETTING", settingName));
+}
+console.log('//--------------------------------------------------');
+
+baseSettingName = "enableTKN_LVL_LE";
+
+// else if (settings["enableLevelEndSplits"]) 
+levelEnds.forEach(function (item, ind) {
+    //console.log("item, ind: " + item + ", " + ind);
+    var settingName = baseSettingName.replace("TKN_LVL", screenNames[item]);
+    console.log(baseStrRespectSplitSetting.replace("TKN_LVL_NUM", item).replace("TKN_LVL_SETTING", settingName));
+});
 console.log('//--------------------------------------------------');
